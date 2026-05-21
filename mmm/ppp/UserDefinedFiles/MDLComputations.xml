@@ -4,7 +4,7 @@
     <foray:Statistic Name="jiaxiang1" Levels="agg2" ColorScheme="Default">
       <foray:DisplayName>jjia3</foray:DisplayName>
       <foray:Definition><![CDATA[STAVG(COUNT<agg1>(QCNT))]]></foray:Definition>
-      <foray:Description><![CDATA[ssss1112222]]></foray:Description>
+      <foray:Description><![CDATA[ssss1112222dsa]]></foray:Description>
     </foray:Statistic>
     <Column Name="test11" Type="bool?" Level="Base" IsPublic="false">
       <Description><![CDATA[]]></Description>
