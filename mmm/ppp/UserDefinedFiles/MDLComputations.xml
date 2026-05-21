@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mdl xsi:noNamespaceSchemaLocation="\\searchdata\apps\MDL\Mdl.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:foray="extension://MDLConverters/ForayConverter" xsi:schemaLocation="extension://MDLConverters/ForayConverter \\searchdata\apps\MDL\ForayConverter.xsd">
   <Computations>
-    <foray:Statistic Name="jiaxiang1" Levels="agg2" ColorScheme="Default">
-      <foray:DisplayName>jjia3</foray:DisplayName>
-      <foray:Definition><![CDATA[STAVG(COUNT<agg1>(QCNT))]]></foray:Definition>
-      <foray:Description><![CDATA[ssss1112222]]></foray:Description>
-    </foray:Statistic>
     <Column Name="test11" Type="bool?" Level="Base" IsPublic="false">
       <Description><![CDATA[]]></Description>
       <Definition><![CDATA[((bool)(assignmentContext.Contains("ss")))]]></Definition>
     </Column>
+    <foray:Statistic Name="jiaxiang1" Levels="agg2" ColorScheme="Default">
+      <foray:DisplayName>jjia3</foray:DisplayName>
+      <foray:Definition><![CDATA[STAVG(COUNT<agg1>(QCNT))]]></foray:Definition>
+      <foray:Description><![CDATA[ssss111]]></foray:Description>
+    </foray:Statistic>
     <ComputationTemplate TemplateName="EventDefinitionTemplate">
       <TemplateParameters>
         <TemplateParameter Name="Level" Type="aggregationLevel" Description="Select an aggregation level in your metric set to define your metrics." />
@@ -346,22 +346,22 @@
     </ComputationTemplate>
     <Column Type="string" Level="Base" Name="IG" IsPublic="true">
       <Definition><![CDATA[
-        jiaxiangsdawdNamespace.clientid
+        jiaxianghubNamespace.clientid
       ]]></Definition>
     </Column>
     <Column Type="string" Level="Base" Name="SESSION_ID" IsPublic="true">
       <Definition><![CDATA[
-        jiaxiangsdawdNamespace.clientid
+        jiaxianghubNamespace.clientid
       ]]></Definition>
     </Column>
     <Column Type="string" Level="Base" Name="USER" IsPublic="true">
       <Definition><![CDATA[
-        jiaxiangsdawdNamespace.clientid
+        jiaxianghubNamespace.clientid
       ]]></Definition>
     </Column>
     <Column Type="string" Level="Base" Name="RAWMUID" IsPublic="true">
       <Definition><![CDATA[
-        jiaxiangsdawdNamespace.clientid
+        jiaxianghubNamespace.clientid
       ]]></Definition>
     </Column>
     <Column Type="long" Level="agg1" Name="QCNT_agg1" IsPublic="false">
