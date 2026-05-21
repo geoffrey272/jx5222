@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mdl xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="\\searchdata\apps\MDL\Mdl.xsd" xsi:schemaLocation="extension://MDLConverters/ForayConverter \\searchdata\apps\MDL\ForayConverter.xsd" xmlns:foray="extension://MDLConverters/ForayConverter">
   <Namespaces>
-    <Namespace Name="jiaxiang212Namespace">
+    <Namespace Name="jx2121Namespace">
       <Tables>
         <Table Name="Root" IsRootTable="true">
           <Properties />
           <DataSources>
-            <DataSource Name="jiaxiang212View">
+            <DataSource Name="jx2121View">
               <DataSourceManagement Name="SyntheticCosmos" />
             </DataSource>
           </DataSources>
           <Extensions>
-            <foray:MetricTableName>jiaxiang212View</foray:MetricTableName>
+            <foray:MetricTableName>jx2121View</foray:MetricTableName>
           </Extensions>
         </Table>
       </Tables>

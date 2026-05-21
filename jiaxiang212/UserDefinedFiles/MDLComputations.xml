@@ -346,22 +346,22 @@
     </ComputationTemplate>
     <Column Type="string" Level="Base" Name="IG" IsPublic="true">
       <Definition><![CDATA[
-        jiaxiang212Namespace.clientid
+        jx2121Namespace.clientid
       ]]></Definition>
     </Column>
     <Column Type="string" Level="Base" Name="SESSION_ID" IsPublic="true">
       <Definition><![CDATA[
-        jiaxiang212Namespace.clientid
+        jx2121Namespace.clientid
       ]]></Definition>
     </Column>
     <Column Type="string" Level="Base" Name="USER" IsPublic="true">
       <Definition><![CDATA[
-        jiaxiang212Namespace.clientid
+        jx2121Namespace.clientid
       ]]></Definition>
     </Column>
     <Column Type="string" Level="Base" Name="RAWMUID" IsPublic="true">
       <Definition><![CDATA[
-        jiaxiang212Namespace.clientid
+        jx2121Namespace.clientid
       ]]></Definition>
     </Column>
     <Column Type="long" Level="agg1" Name="QCNT_agg1" IsPublic="false">

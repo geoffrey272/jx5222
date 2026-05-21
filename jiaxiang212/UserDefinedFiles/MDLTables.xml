@@ -2,7 +2,7 @@
 <Mdl xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="\\searchdata\apps\MDL\Mdl.xsd" xsi:schemaLocation="extension://MDLConverters/ForayConverter \\searchdata\apps\MDL\ForayConverter.xsd" xmlns:foray="extension://MDLConverters/ForayConverter">
   <Namespaces>
     <Namespace Name="ForayNamespace">
-      <ParentNamespace>jiaxiang212Namespace</ParentNamespace>
+      <ParentNamespace>jx2121Namespace</ParentNamespace>
       <Tables>
         <Table Name="Base">
           <SourceTable>Root</SourceTable>
