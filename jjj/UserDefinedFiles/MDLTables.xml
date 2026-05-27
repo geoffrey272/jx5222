@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mdl xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="\\searchdata\apps\MDL\Mdl.xsd" xsi:schemaLocation="extension://MDLConverters/ForayConverter \\searchdata\apps\MDL\ForayConverter.xsd" xmlns:foray="extension://MDLConverters/ForayConverter">
+  <Namespaces>
+    <Namespace Name="ForayNamespace">
+      <ParentNamespace>jx111Namespace</ParentNamespace>
+      <Tables>
+        <Table Name="Base">
+          <SourceTable>Root</SourceTable>
+          <Resources>
+            <Resource Name="Foray.Statistics.dll" />
+            <Resource Name="ForayStatisticUtil.dll" />
+            <Resource Name="ForayCommonHelper.dll" />
+            <Resource Name="Newtonsoft.Json.dll" />
+          </Resources>
+          <Extensions>
+            <foray:MetricTableName>BaseTable</foray:MetricTableName>
+            <foray:TableSegmentLevel>Page</foray:TableSegmentLevel>
+          </Extensions>
+        </Table>
+        <Table Name="agg1">
+          <SourceTable>Base</SourceTable>
+          <GroupByColumn>IG</GroupByColumn>
+          <Extensions>
+            <foray:MetricTableName>agg1LevelTable</foray:MetricTableName>
+            <foray:TableSegmentLevel>Page</foray:TableSegmentLevel>
+            <foray:IsOutput>true</foray:IsOutput>
+          </Extensions>
+        </Table>
+        <Table Name="agg2">
+          <SourceTable>agg1</SourceTable>
+          <GroupByColumn>RAWMUID</GroupByColumn>
+          <Extensions>
+            <foray:MetricTableName>agg2LevelTable</foray:MetricTableName>
+            <foray:TableSegmentLevel>User</foray:TableSegmentLevel>
+            <foray:IsOutput>true</foray:IsOutput>
+          </Extensions>
+        </Table>
+      </Tables>
+    </Namespace>
+  </Namespaces>
+</Mdl>
