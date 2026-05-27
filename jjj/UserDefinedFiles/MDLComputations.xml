@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mdl xsi:noNamespaceSchemaLocation="\\searchdata\apps\MDL\Mdl.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:foray="extension://MDLConverters/ForayConverter" xsi:schemaLocation="extension://MDLConverters/ForayConverter \\searchdata\apps\MDL\ForayConverter.xsd">
   <Computations>
-    <Column Name="test527" Type="bool?" Level="Base" IsPublic="false">
+    <Column Name="test527" Type="bool?" Level="Ba1se" IsPublic="false">
       <Description><![CDATA[]]></Description>
       <Definition><![CDATA[((bool)(assignmentContext.Contains("ss")))]]></Definition>
     </Column>
