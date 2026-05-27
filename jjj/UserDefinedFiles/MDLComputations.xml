@@ -1,0 +1,428 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mdl xsi:noNamespaceSchemaLocation="\\searchdata\apps\MDL\Mdl.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:foray="extension://MDLConverters/ForayConverter" xsi:schemaLocation="extension://MDLConverters/ForayConverter \\searchdata\apps\MDL\ForayConverter.xsd">
+  <Computations>
+    <Column Name="test11" Type="bool?" Level="Base" IsPublic="false">
+      <Description><![CDATA[]]></Description>
+      <Definition><![CDATA[((bool)(assignmentContext.Contains("ss")))]]></Definition>
+    </Column>
+    <foray:Statistic Name="jiaxiang1" Levels="agg2" ColorScheme="Default">
+      <foray:DisplayName>jjia3</foray:DisplayName>
+      <foray:Definition><![CDATA[STAVG(COUNT<agg1>(QCNT))]]></foray:Definition>
+      <foray:Description><![CDATA[ssss111]]></foray:Description>
+    </foray:Statistic>
+    <ComputationTemplate TemplateName="EventDefinitionTemplate">
+      <TemplateParameters>
+        <TemplateParameter Name="Level" Type="aggregationLevel" Description="Select an aggregation level in your metric set to define your metrics." />
+        <TemplateParameter Name="EventDefinition" Type="string" Description="Write a base-level boolean event condition (example: `EventName == “click”`)  or the name of a boolean custom column (example: `IsClick`)." />
+        <TemplateParameter Name="EventNameForDisplay" Type="string" Description="Use a friendly nickname for the event definition to display in scorecards." />
+        <TemplateParameter Name="ColorScheme" Type="string" Description="Write 'Default' if the goal is to increase the metric value; 'Inverse' if the goal is to decrease the metric value; “Neutral” if the goal direction depends on the experiment." />
+      </TemplateParameters>
+      <TemplateDescription><![CDATA[The purpose of the event definition template is to create indicator and value metrics for an event captured in your telemetry.<br>The proportion metric will create a binary condition at your aggregation level's record of events of whether the event occurred, and report a proportion of events in each of your variant groups in the scorecard.<br> The count metric will first count all events occurring in an aggregation level's record of events, and report an average count in each of your variant groups in the scorecard.]]></TemplateDescription>
+      <TemplateDefinition>
+        <Statistic Levels="${Level}" Name="${Level}Proportion_${EventNameForDisplay}" xmlns="extension://MDLConverters/ForayConverter" ColorScheme="${ColorScheme}">
+          <Description><![CDATA[
+            The proportion of all ${Level} which had the ${EventNameForDisplay} event. This event is defined as:<br><br>
+            <code>${EventDefinition}</code><br><br> 
+            <b>Note:</b> This metric considers all ${Level} assigned to the experiment.<br><br> 
+            Internal name: ${Level}Proportion_${EventNameForDisplay} 
+          ]]></Description>
+          <Definition><![CDATA[ 
+            STAVG(MAX<${Level}>(${EventDefinition} ? 1 : 0)) 
+          ]]></Definition>
+          <DisplayName>
+
+                ${EventNameForDisplay} Proportion (by ${Level})
+
+            </DisplayName>
+        </Statistic>
+        <Statistic Levels="${Level}" Name="${Level}Value_${EventNameForDisplay}" xmlns="extension://MDLConverters/ForayConverter" ColorScheme="${ColorScheme}">
+          <Description><![CDATA[ 
+
+            The average count of all ${Level} of ${EventNameForDisplay} event. This event is defined as:<br><br> 
+            <code>${EventDefinition}</code><br><br> 
+            <b>Note:</b> This metric considers all ${Level}s assigned to the experiment.<br><br> 
+            Internal name: ${Level}Value_${EventNameForDisplay} 
+
+          ]]></Description>
+          <Definition><![CDATA[ 
+
+            STAVG(SUM<${Level}>(${EventDefinition} ? 1 : 0)) 
+
+          ]]></Definition>
+          <DisplayName>
+                ${EventNameForDisplay} Count (by ${Level})
+
+            </DisplayName>
+        </Statistic>
+      </TemplateDefinition>
+    </ComputationTemplate>
+    <ComputationTemplate TemplateName="FunnelDefinition">
+      <TemplateParameters>
+        <TemplateParameter Name="Level" Type="aggregationLevel" Description="Select an aggregation level in your metric set to define your metrics." />
+        <TemplateParameter Name="TimeAsDouble" Type="column" Description="Use an existing base-level custom column that converts the timestamp to a double column in seconds. Example definition: new DateTimeOffset(Timestamp).ToUnixTimeSeconds()" />
+        <TemplateParameter Name="FirstAction" Type="string" Description="For the first action in your funnel, write a base-level boolean event condition (example: `EventName == 'click'`)  or the name of a boolean custom column (example: `IsClick`)" />
+        <TemplateParameter Name="FirstActionForDisplay" Type="string" Description="Use a friendly nickname for the first action definition to display in scorecards." />
+        <TemplateParameter Name="SecondAction" Type="string" Description="For the second action in your funnel, write a base-level boolean event condition (example: `EventName == 'purchase'`)  or the name of a boolean custom column (example: `IsPurchase`)" />
+        <TemplateParameter Name="SecondActionForDisplay" Type="string" Description="Use a friendly nickname for the second action definition to display in scorecards." />
+        <TemplateParameter Name="ColorScheme" Type="string" Description="Write 'Default' if the goal is to increase the metric value; 'Inverse' if the goal is to decrease the metric value; 'Neutral' if the goal direction depends on the experiment." />
+      </TemplateParameters>
+      <TemplateDescription><![CDATA[The purpose of the funnel definition template is to create an indicator metric for a "second" action or event captured in your telemetry conditional on the action occurring in the population who had a "first" action or event and specific to second events that came after the first event. The metric created is a conditional proportion of aggregation levels that have the second action given the level had the first action before the second action or not at all.]]></TemplateDescription>
+      <TemplateDefinition>
+        <Statistic Levels="${Level}" Name="${Level}Proportion_${SecondActionForDisplay}_After_${FirstActionForDisplay}" xmlns="extension://MDLConverters/ForayConverter" ColorScheme="${ColorScheme}">
+          <Description><![CDATA[ 
+  
+              The proportion of all ${Level} which had the ${FirstActionForDisplay} FirstAction, then the ${SecondActionForDisplay} SecondAction.  
+  
+            ]]></Description>
+          <Definition><![CDATA[ 
+  
+              STAVG(MAX<${Level}>(${FirstAction} ? 1 : 0) > 0.0 && MINIf<${Level}>(${TimeAsDouble}, ${FirstAction}) - MAXIf<${Level}>(${TimeAsDouble}, ${SecondAction}) <= 0 ?   MAX<${Level}>(${SecondAction} ? 1 : 0) : 0 ) 
+  
+            ]]></Definition>
+          <DisplayName>
+
+                % ${SecondActionForDisplay} Conditional on ${FirstActionForDisplay} (by ${Level})
+
+            </DisplayName>
+        </Statistic>
+      </TemplateDefinition>
+    </ComputationTemplate>
+    <ComputationTemplate TemplateName="RatioDefinition">
+      <TemplateParameters>
+        <TemplateParameter Name="Level" Type="aggregationLevel" Description="Select an aggregation level in your metric set to define your metrics." />
+        <TemplateParameter Name="FirstAction" Type="string" Description="For the first action in your funnel, write a base-level boolean event condition (example: `EventName == 'click'`)  or the name of a boolean custom column (example: `IsClick`)" />
+        <TemplateParameter Name="FirstActionForDisplay" Type="string" Description="Use a friendly nickname for the first action definition to display in scorecards." />
+        <TemplateParameter Name="SecondAction" Type="string" Description="For the second action in your funnel, write a base-level boolean event condition (example: `EventName == 'purchase'`)  or the name of a boolean custom column (example: `IsPurchase`)" />
+        <TemplateParameter Name="SecondActionForDisplay" Type="string" Description="Use a friendly nickname for the second action definition to display in scorecards." />
+        <TemplateParameter Name="ColorScheme" Type="string" Description="Write 'Default' if the goal is to increase the metric value; 'Inverse' if the goal is to decrease the metric value; 'Neutral' if the goal direction depends on the experiment." />
+      </TemplateParameters>
+      <TemplateDescription><![CDATA[The purpose of the ratio definition template is to create indicator and ratio metrics for a "second" action or event captured in your telemetry conditional on the action occurring in the population who had a "first" action or event. No condition checking the time-ordering of events is implemented. The two metrics created are a conditional proportion of the second action occurring > 0 times per first action occurring > 0 times, and a ratio of second action total counts to first action total counts.]]></TemplateDescription>
+      <TemplateDefinition>
+        <foray:Statistic Levels="${Level}" Name="${Level}_Proportion_${FirstActionForDisplay}_${SecondActionForDisplay}" ColorScheme="${ColorScheme}" xmlns:foray="extension://MDLConverters/ForayConverter">
+          <foray:Description><![CDATA[ 
+  
+             Percent, among all ${Level} where ${FirstActionForDisplay} is taken at least 1x, where ${SecondActionForDisplay} is also taken at least 1x by the same ${Level}. 
+  
+            ]]></foray:Description>
+          <foray:Definition><![CDATA[ 
+  
+              STAVG(MAXIf<${Level}>(MAX<${Level}>(${SecondAction} ? 1:0), MAX<${Level}>(${FirstAction})))
+  
+            ]]></foray:Definition>
+          <foray:DisplayName> % ${SecondActionForDisplay} given ${FirstActionForDisplay} (${Level}
+                proportion)</foray:DisplayName>
+        </foray:Statistic>
+        <foray:Statistic Levels="${Level}" Name="${Level}AvgRatio_${FirstActionForDisplay}_${SecondActionForDisplay}" ColorScheme="${ColorScheme}" xmlns:foray="extension://MDLConverters/ForayConverter">
+          <foray:Description><![CDATA[ 
+  
+              Average ratio of ${SecondActionForDisplay} per ${FirstActionForDisplay}, among all ${Level} where ${FirstActionForDisplay} is taken at least 1x. 
+  
+            ]]></foray:Description>
+          <foray:Definition><![CDATA[ 
+  
+              STAVG(SafeDivide(SUM<${Level}>(${SecondAction} ? 1:0), SUM<${Level}>(${FirstAction} ? 1:0))) 
+  
+            ]]></foray:Definition>
+          <foray:DisplayName>Ratio ${SecondActionForDisplay} to ${FirstActionForDisplay} (${Level} rate)</foray:DisplayName>
+        </foray:Statistic>
+      </TemplateDefinition>
+    </ComputationTemplate>
+    <ComputationTemplate TemplateName="RetentionDefinition">
+      <TemplateParameters>
+        <TemplateParameter Name="Level" Type="aggregationLevel" Description="Select an aggregation level in your metric set to define your metrics." />
+        <TemplateParameter Name="TimeAsDouble" Type="column" Description="Use an existing base-level custom column that converts the timestamp to a double column in seconds. Example definition: new DateTimeOffset(Timestamp).ToUnixTimeSeconds()" />
+        <TemplateParameter Name="Day" Type="column" Description="Use an existing base-level custom column that converts the timestamp to a day-month-year string column. Example definition: Timestamp.ToString('dd-MM-yyyy')" />
+      </TemplateParameters>
+      <TemplateDescription><![CDATA[The purpose of the retention definition template is to create indicator metrics for an aggregation level's returned activity during the experiment period.<br>The '1 week retention' metrics will count the proportion of aggregation levels who returned after 7 days from the first time visiting the product. <br>The '% 2-day Engaged' metric measures the proportion of aggregation levels having activity in 2 different days.<br>The 'Active Days/UU' metric measures the value metric of the average number of days aggregation levels have activity.]]></TemplateDescription>
+      <TemplateDefinition>
+        <Column Type="bool" Level="${Level}" Name="Engaged2d">
+          <Definition><![CDATA[ 
+  
+              COUNTDISTINCT<${Level}>(${Day}) > 1 ? true : false 
+  
+            ]]></Definition>
+        </Column>
+        <Statistic Levels="${Level}" Name="DaysPer${Level}" xmlns="extension://MDLConverters/ForayConverter">
+          <Description><![CDATA[ 
+  
+              Average numbers of days with active use. Calculated as (total # of days ${Level}s are considered active)/(total # of ${Level}s). 
+  
+            ]]></Description>
+          <Definition><![CDATA[ 
+  
+              STAVG(COUNTDISTINCT<${Level}>(${Day})) 
+  
+            ]]></Definition>
+          <DisplayName>Active Days/UU</DisplayName>
+        </Statistic>
+        <Statistic Levels="${Level}" Name="Percent2DEngaged${Level}s" xmlns="extension://MDLConverters/ForayConverter">
+          <Description><![CDATA[ 
+  
+              Proportion of ${Level}s who are considered engaged ${Level}s (had  on 2 different days). 
+  
+            ]]></Description>
+          <Definition><![CDATA[ 
+  
+              STAVG(Engaged2d ? 1: 0) 
+  
+            ]]></Definition>
+          <DisplayName>% 2-day Engaged ${Level}s</DisplayName>
+        </Statistic>
+        <Statistic Levels="${Level}" Name="OneWeekRetention" xmlns="extension://MDLConverters/ForayConverter">
+          <Description><![CDATA[ 
+  
+              Proportion of ${Level}s who came back and engaged later than seven days after they were first engaged. 
+  
+            ]]></Description>
+          <Definition><![CDATA[ 
+  
+          STAVG( 
+  
+                  MAX<${Level}>(${TimeAsDouble}) - MIN<${Level}>(${TimeAsDouble}) 
+  
+               ) / 86400.0 > 7.0 ? 1.0 : 0.0  
+  
+           ]]></Definition>
+          <DisplayName> 1 Week Retention</DisplayName>
+        </Statistic>
+      </TemplateDefinition>
+    </ComputationTemplate>
+    <ComputationTemplate TemplateName="EngagementDefinition">
+      <TemplateParameters>
+        <TemplateParameter Name="Level" Type="aggregationLevel" Description="Select an aggregation level in your metric set to define your metrics." />
+        <TemplateParameter Name="TimeAsDouble" Type="column" Description="Use an existing base-level custom column that converts the timestamp to a double column in seconds. Example definition: new DateTimeOffset(Timestamp).ToUnixTimeSeconds()" />
+        <TemplateParameter Name="Day" Type="column" Description="Use an existing base-level custom column that converts the timestamp to a day-month-year string column. Example definition: Timestamp.ToString('dd-MM-yyyy')" />
+        <TemplateParameter Name="ScopeDefinition" Type="string" Description=" To measure engagement on a particular scope of your logs, write a base-level boolean scoping condition (example: `routeView.Contains('homepage')`)  or the name of a base-level boolean custom column (example: `IsHomePage`)" />
+        <TemplateParameter Name="ScopeNameForDisplay" Type="string" Description="Use a friendly nickname for the second action definition to display in scorecards." />
+      </TemplateParameters>
+      <TemplateDescription><![CDATA[The purpose of the engagement definition template is to create proportion metrics for an aggregation level's revisiting a scope (or feature) during the experiment period conditional on the aggregation level having any activity in a certain scope of your UX.<br>The "1 week retention" metrics will count the proportion of aggregation levels in a scope who returned after 7 days from the first time visiting the scope. There are two versions of this metric:<br>*"1 week Retention" will report the filtered retention for activity in the scope among all aggregation levels in the experiment - users without any activity in the scope contribute 0 to the metric*"1 week Active User Retention" will report the conditional retention for activity in the scope only among with any activity in the scope - aggregation levels without activity are not in the metric.<br><br>The "1 week returned" metrics will count the proportion of aggregation levels in a scope who returned after 7 days from their first time visiting the product - which may be earlier than visiting the scope. Similarly, there are two versions of this metric:<br>* "1 week Returned" will report the filtered retention for activity in the scope among all aggregation levels in the experiment - aggregation levels without any activity in the scope contribute 0 to the metric* "1 week Active User Returned" will report the conditional retention for activity in the scope only among with any activity in the scope - aggregation levels without activity are not in the metric. <br>The "% 2-day Engaged" metric measures the proportion of aggregation levels having activity in the scope in 2 different days.<br>The "Active Days/UU" metric measures the conditional value metric of the average number of days users have activity in a given scope.]]></TemplateDescription>
+      <TemplateDefinition>
+        <Column Type="bool" Level="${Level}" Name="${ScopeNameForDisplay}Engaged2d">
+          <Definition><![CDATA[ 
+  
+              COUNTDISTINCTIf<${Level}>(Day, ${ScopeDefinition}) > 1 ? true : false 
+  
+            ]]></Definition>
+        </Column>
+        <Statistic Levels="${Level}" Name="${ScopeNameForDisplay}DaysPer${Level}" xmlns="extension://MDLConverters/ForayConverter">
+          <Description><![CDATA[ 
+  
+              Average numbers of days ${Level}s actively use ${ScopeNameForDisplay}. Calculated as (total # of days ${Level}s are considered active)/(total # of ${Level}s). 
+  
+            ]]></Description>
+          <Definition><![CDATA[ 
+  
+              STAVG(COUNTDISTINCTIf<${Level}>(Day, ${ScopeDefinition})) 
+  
+            ]]></Definition>
+          <DisplayName>${ScopeNameForDisplay} Active Days/UU</DisplayName>
+        </Statistic>
+        <Statistic Levels="${Level}" Name="${ScopeNameForDisplay}_Percent2DEngaged${Level}s" xmlns="extension://MDLConverters/ForayConverter">
+          <Description><![CDATA[ 
+  
+              Proportion of ${Level}s who are considered engaged ${ScopeNameForDisplay} ${Level}s (had  on 2 different days). 
+  
+            ]]></Description>
+          <Definition><![CDATA[ 
+  
+              STAVG(${ScopeNameForDisplay}Engaged2d ? 1: 0) 
+  
+            ]]></Definition>
+          <DisplayName>% 2-day Engaged ${ScopeNameForDisplay} ${Level}s</DisplayName>
+        </Statistic>
+        <Statistic Levels="${Level}" Name="${ScopeNameForDisplay}OneWeekRetention" xmlns="extension://MDLConverters/ForayConverter">
+          <Description><![CDATA[ 
+  
+              Proportion of ${ScopeNameForDisplay} ${Level}s who came back and engaged later than seven days after they were first engaged. 
+  
+            ]]></Description>
+          <!--The
+            first condition checks if the ${Level} had the engagement signal at least once and if
+            not marks the ${Level} as not retained. The second condition checks if the ${Level} had
+            the engagement signal more than seven days after the first time they engaged and if so
+            marks them as retained. -->
+          <Definition><![CDATA[ 
+  
+          STAVG( 
+  
+               (double?)MIN<${Level}>((${ScopeDefinition} ? ${TimeAsDouble} : double.PositiveInfinity)) != double.PositiveInfinity ?  
+  
+               (MAX<${Level}>( 
+  
+                  MAX<${Level}>((${ScopeDefinition} ? ${TimeAsDouble} : double.NegativeInfinity)) - MIN<${Level}>((${ScopeDefinition} ? ${TimeAsDouble} : double.PositiveInfinity)) 
+  
+               ) / 86400.0 > 7.0 ? 1.0 : 0.0 ) 
+  
+                : 0.0 
+  
+          ) ]]></Definition>
+          <DisplayName>${ScopeNameForDisplay} 1 Week Retention</DisplayName>
+        </Statistic>
+        <Statistic Levels="${Level}" Name="${ScopeNameForDisplay}OneWeekReturned" xmlns="extension://MDLConverters/ForayConverter">
+          <Description><![CDATA[ 
+  
+              Proportion of ${ScopeNameForDisplay} ${Level}s who came back later than seven days after they were first engaged. 
+  
+            ]]></Description>
+          <!--The
+            first condition checks if the ${Level} had the engagement signal at least once and if
+            not marks the ${Level} as not retained. The second condition checks if the ${Level} came
+            back more than seven days after the first time they engaged and if so marks them as
+            retained. -->
+          <Definition><![CDATA[ 
+  
+          STAVG( 
+  
+               (double?)MIN<${Level}>((${ScopeDefinition} ? ${TimeAsDouble} : double.PositiveInfinity)) != double.PositiveInfinity ?  
+  
+               (MAX<${Level}>( 
+  
+                  MAX<${Level}>(${TimeAsDouble}) - MIN<${Level}>((${ScopeDefinition} ? ${TimeAsDouble} : double.PositiveInfinity)) 
+  
+               ) / 86400.0 > 7.0 ? 1.0 : 0.0 ) 
+  
+                : 0.0 
+  
+          ) ]]></Definition>
+          <DisplayName>${ScopeNameForDisplay} 1 Week Returned</DisplayName>
+        </Statistic>
+        <Statistic Levels="${Level}" Name="${ScopeNameForDisplay}OneWeekActive${Level}Retention" xmlns="extension://MDLConverters/ForayConverter">
+          <Description><![CDATA[ 
+  
+              Proportion of active ${ScopeNameForDisplay} ${Level}s who came back and engaged later than seven days after they were first engaged. 
+  
+            ]]></Description>
+          <!--The
+            first condition checks if the ${Level} had the engagement signal at least once and if
+            not removes the ${Level} from the metric's calculation. The second condition checks if
+            the ${Level} had the engagement signal more than seven days after the first time they
+            engaged and if so marks them as retained. -->
+          <Definition><![CDATA[ 
+  
+                     STAVG( 
+  
+               (double?)MIN<${Level}>((${ScopeDefinition} ? ${TimeAsDouble} : double.PositiveInfinity)) != double.PositiveInfinity ?  
+  
+               (MAX<${Level}>( 
+  
+                  MAX<${Level}>((${ScopeDefinition} ? ${TimeAsDouble} : double.NegativeInfinity)) - MIN<${Level}>((${ScopeDefinition} ? ${TimeAsDouble} : double.PositiveInfinity)) 
+  
+               ) / 86400.0 > 7.0 ? 1.0 : 0.0 ) 
+  
+                : (double?)null 
+  
+          ) ]]></Definition>
+          <DisplayName>${ScopeNameForDisplay} 1 Week Active ${Level} Retention</DisplayName>
+        </Statistic>
+        <Statistic Levels="${Level}" Name="${ScopeNameForDisplay}OneWeekActive${Level}Returned" xmlns="extension://MDLConverters/ForayConverter">
+          <Description><![CDATA[ 
+  
+              Proportion of active ${ScopeNameForDisplay} ${Level}s who came back later than seven days after they were first engaged. 
+  
+            ]]></Description>
+          <!--The
+            first condition checks if the ${Level} had the engagement signal at least once and if
+            not removes the ${Level} from the metric's calculation. The second condition checks if
+            the ${Level} came back more than seven days after the first time they engaged and if so
+            marks them as retained. -->
+          <Definition><![CDATA[ 
+  
+                     STAVG( 
+  
+               (double?)MIN<${Level}>((${ScopeDefinition} ? ${TimeAsDouble} : double.PositiveInfinity)) != double.PositiveInfinity ?  
+  
+               (MAX<${Level}>( 
+  
+                  MAX<${Level}>(${TimeAsDouble}) - MIN<${Level}>((${ScopeDefinition} ? ${TimeAsDouble} : double.PositiveInfinity)) 
+  
+               ) / 86400.0 > 7.0 ? 1.0 : 0.0 ) 
+  
+                : (double?)null 
+  
+          ) ]]></Definition>
+          <DisplayName>${ScopeNameForDisplay} 1 Week Active ${Level} Returned</DisplayName>
+        </Statistic>
+      </TemplateDefinition>
+    </ComputationTemplate>
+    <Column Type="string" Level="Base" Name="IG" IsPublic="true">
+      <Definition><![CDATA[
+        jx111Namespace.clientid
+      ]]></Definition>
+    </Column>
+    <Column Type="string" Level="Base" Name="SESSION_ID" IsPublic="true">
+      <Definition><![CDATA[
+        jx111Namespace.clientid
+      ]]></Definition>
+    </Column>
+    <Column Type="string" Level="Base" Name="USER" IsPublic="true">
+      <Definition><![CDATA[
+        jx111Namespace.clientid
+      ]]></Definition>
+    </Column>
+    <Column Type="string" Level="Base" Name="RAWMUID" IsPublic="true">
+      <Definition><![CDATA[
+        jx111Namespace.clientid
+      ]]></Definition>
+    </Column>
+    <Column Type="long" Level="agg1" Name="QCNT_agg1" IsPublic="false">
+      <Definition><![CDATA[SUM(QCNT)]]></Definition>
+    </Column>
+    <Column Type="string" Level="agg1" Name="MinQueryDate_agg1" IsPublic="false">
+      <Definition><![CDATA[MIN(MinQueryDate)]]></Definition>
+    </Column>
+    <Column Type="string" Level="agg1" Name="MaxQueryDate_agg1" IsPublic="false">
+      <Definition><![CDATA[MAX(MaxQueryDate)]]></Definition>
+    </Column>
+    <Column Type="string" Level="agg1" Name="MinQueryTime_agg1" IsPublic="false">
+      <Definition><![CDATA[MIN(MinQueryTime)]]></Definition>
+    </Column>
+    <Column Type="string" Level="agg1" Name="MaxQueryTime_agg1" IsPublic="false">
+      <Definition><![CDATA[MAX(MaxQueryTime)]]></Definition>
+    </Column>
+    <foray:Statistic Levels="agg1,agg2" Name="QCNT">
+      <foray:Definition><![CDATA[STAVG(QCNT_agg1)]]></foray:Definition>
+    </foray:Statistic>
+    <foray:Statistic Levels="agg1,agg2" Name="MinQueryDate">
+      <foray:Definition><![CDATA[STMIN(MinQueryDate_agg1)]]></foray:Definition>
+    </foray:Statistic>
+    <foray:Statistic Levels="agg1,agg2" Name="MaxQueryDate">
+      <foray:Definition><![CDATA[STMAX(MaxQueryDate_agg1)]]></foray:Definition>
+    </foray:Statistic>
+    <foray:Statistic Levels="agg1,agg2" Name="MinQueryTime">
+      <foray:Definition><![CDATA[STMIN(MinQueryTime_agg1)]]></foray:Definition>
+    </foray:Statistic>
+    <foray:Statistic Levels="agg1,agg2" Name="MaxQueryTime">
+      <foray:Definition><![CDATA[STMAX(MaxQueryTime_agg1)]]></foray:Definition>
+    </foray:Statistic>
+    <Column Type="string" Level="Base" Name="FLIGHT" IsPublic="true">
+      <Definition><![CDATA[OnboardingCommonHelper.ForayCommonHelper.StandardizedFlightParser(assignmentContext, "#Flights#")]]></Definition>
+    </Column>
+    <Column Type="string" Level="Base" Name="PRIMARY_FLIGHT" IsPublic="true">
+      <Definition><![CDATA[OnboardingCommonHelper.ForayCommonHelper.StandardizedFlightParser(assignmentContext, "#Flights#")]]></Definition>
+    </Column>
+    <Column Type="string" Level="Base" Name="DATE" IsPublic="true">
+      <Definition><![CDATA[datetime.ToString("yyyy-MM-dd")]]></Definition>
+      <Extensions>
+        <foray:IsForaySegment>true</foray:IsForaySegment>
+      </Extensions>
+    </Column>
+    <Column Type="int" Level="Base" Name="QCNT" IsPublic="false">
+      <Definition><![CDATA[1]]></Definition>
+    </Column>
+    <Column Type="string" Level="Base" Name="REQUEST_TIME" IsPublic="true">
+      <Definition><![CDATA[datetime.ToString("o")]]></Definition>
+    </Column>
+    <Column Type="string" Level="Base" Name="MinQueryDate" IsPublic="false">
+      <Definition><![CDATA[datetime.ToString("yyyy-MM-dd")]]></Definition>
+    </Column>
+    <Column Type="string" Level="Base" Name="MaxQueryDate" IsPublic="false">
+      <Definition><![CDATA[datetime.ToString("yyyy-MM-dd")]]></Definition>
+    </Column>
+    <Column Type="string" Level="Base" Name="MinQueryTime" IsPublic="false">
+      <Definition><![CDATA[datetime.ToString("o")]]></Definition>
+    </Column>
+    <Column Type="string" Level="Base" Name="MaxQueryTime" IsPublic="false">
+      <Definition><![CDATA[datetime.ToString("o")]]></Definition>
+    </Column>
+  </Computations>
+</Mdl>

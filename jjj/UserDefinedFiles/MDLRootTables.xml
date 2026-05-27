@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mdl xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="\\searchdata\apps\MDL\Mdl.xsd" xsi:schemaLocation="extension://MDLConverters/ForayConverter \\searchdata\apps\MDL\ForayConverter.xsd" xmlns:foray="extension://MDLConverters/ForayConverter">
+  <Namespaces>
+    <Namespace Name="jx111Namespace">
+      <Tables>
+        <Table Name="Root" IsRootTable="true">
+          <Properties />
+          <DataSources>
+            <DataSource Name="jx111View">
+              <DataSourceManagement Name="SyntheticCosmos" />
+            </DataSource>
+          </DataSources>
+          <Extensions>
+            <foray:MetricTableName>jx111View</foray:MetricTableName>
+          </Extensions>
+        </Table>
+      </Tables>
+    </Namespace>
+  </Namespaces>
+</Mdl>
