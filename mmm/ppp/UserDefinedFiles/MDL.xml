@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Mdl xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="\\searchdata\apps\MDL\Mdl.xsd" Name="jiaxiangsdawd">
+<Mdl xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="\\searchdata\apps\MDL\Mdl.xsd" Name="jiaxianghub">
   <Usings>
     <Using Name="System" />
     <Using Name="System.Linq" />
