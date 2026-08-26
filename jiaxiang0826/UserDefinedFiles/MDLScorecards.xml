@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mdl xsi:noNamespaceSchemaLocation="\\searchdata\apps\MDL\Mdl.xsd" xsi:schemaLocation="extension://MDLConverters/ForayConverter \\searchdata\apps\MDL\ForayConverter.xsd extension://MDLConverters/MetricSetZipConverter \\searchdata\apps\MDL\MetricSetZipConverter.xsd extension://MDLConverters/MetricsPipeline \\searchdata\apps\MDL\MetricsPipeline.xsd extension://MDLConverters/MetricsViewConverter \\searchdata\apps\MDL\MetricsViewConverter.xsd extension://MDLConverters/MetricTableViewConverter \\searchdata\apps\MDL\MetricTableViewConverter.xsd extension://MDLConverters/VivaceConverter \\searchdata\apps\MDL\VivaceConverter.xsd extension://MDLConverters/xForayConverter \\searchdata\apps\MDL\xForayConverter.xsd" xmlns:metricSet="extension://MDLConverters/MetricSetZipConverter" xmlns:pipeline="extension://MDLConverters/MetricsPipeline" xmlns:viewconverter="extension://MDLConverters/MetricTableViewConverter" xmlns:foray="extension://MDLConverters/ForayConverter" xmlns:metricsView="extension://MDLConverters/MetricsViewConverter" xmlns:xforay="extension://MDLConverters/xForayConverter" xmlns:vivace="extension://MDLConverters/VivaceConverter" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Imports>
+    <Import File="Scorecard\jiaxiangTestScorecard.UserBased.xml" />
+  </Imports>
+</Mdl>
