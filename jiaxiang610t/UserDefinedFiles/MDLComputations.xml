@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mdl xsi:noNamespaceSchemaLocation="\\searchdata\apps\MDL\Mdl.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:foray="extension://MDLConverters/ForayConverter" xsi:schemaLocation="extension://MDLConverters/ForayConverter \\searchdata\apps\MDL\ForayConverter.xsd">
   <Computations>
-    <Column Name="test121" Type="bool?" Level="Base" IsPublic="false">
+    <Column Name="test11" Type="bool?" Level="Base" IsPublic="false">
       <Description><![CDATA[]]></Description>
       <Definition><![CDATA[((bool)(assignmentContext.Contains("ss")))]]></Definition>
     </Column>
@@ -346,22 +346,22 @@
     </ComputationTemplate>
     <Column Type="string" Level="Base" Name="IG" IsPublic="true">
       <Definition><![CDATA[
-        jx2121Namespace.clientid
+        jiaxiang610tNamespace.clientid
       ]]></Definition>
     </Column>
     <Column Type="string" Level="Base" Name="SESSION_ID" IsPublic="true">
       <Definition><![CDATA[
-        jx2121Namespace.clientid
+        jiaxiang610tNamespace.clientid
       ]]></Definition>
     </Column>
     <Column Type="string" Level="Base" Name="USER" IsPublic="true">
       <Definition><![CDATA[
-        jx2121Namespace.clientid
+        jiaxiang610tNamespace.clientid
       ]]></Definition>
     </Column>
     <Column Type="string" Level="Base" Name="RAWMUID" IsPublic="true">
       <Definition><![CDATA[
-        jx2121Namespace.clientid
+        jiaxiang610tNamespace.clientid
       ]]></Definition>
     </Column>
     <Column Type="long" Level="agg1" Name="QCNT_agg1" IsPublic="false">
