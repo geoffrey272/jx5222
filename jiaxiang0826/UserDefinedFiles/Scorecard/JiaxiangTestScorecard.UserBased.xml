@@ -7,7 +7,7 @@
       <foray:MetricCategory>jiaxiangTestScorecard</foray:MetricCategory>
       <foray:AnalysisProfiles>
         <foray:AnalysisProfile>
-          <foray:ProfileName>jx2121.jiaxiangTestScorecard.AB.Standard</foray:ProfileName>
+          <foray:ProfileName>JiaxiangTest.jiaxiangTestScorecard.AB.Standard</foray:ProfileName>
           <foray:Data>
             <foray:Filters>
               <foray:Filter><![CDATA[

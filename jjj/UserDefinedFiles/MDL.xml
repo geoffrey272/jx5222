@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mdl xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="\\searchdata\apps\MDL\Mdl.xsd" Name="jx111">
+  <Usings>
+    <Using Name="System" />
+    <Using Name="System.Linq" />
+    <Using Name="OnboardingCommonHelper" />
+  </Usings>
+  <Imports>
+    <Import File="..\CommonFiles\MDLCommon.xml" />
+    <Import File="MDLConverterConfigs.xml" />
+    <Import File="MDLTables.xml" />
+    <Import File="MDLRootTables.xml" />
+    <Import File="MDLRootTablesManaged.xml" />
+    <Import File="MDLComputations.xml" />
+    <Import File="MDLScorecards.xml" />
+  </Imports>
+</Mdl>

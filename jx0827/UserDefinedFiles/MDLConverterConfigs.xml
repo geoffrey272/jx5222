@@ -10,7 +10,7 @@
       </metricSet:IgnoreAssemblies>
       <metricSet:Plugins>
         <metricSet:Plugin>
-          <metricSet:MetricSet>jx2121_Foray</metricSet:MetricSet>
+          <metricSet:MetricSet>jiaxiang0827_Foray</metricSet:MetricSet>
           <metricSet:BaseTable>Base</metricSet:BaseTable>
           <metricSet:Assembly>MDLConverters</metricSet:Assembly>
           <metricSet:Type>Microsoft.DataMining.MDL.Converters.MetricSetZip.Foray.ForayMetricSetConverterPlugin</metricSet:Type>

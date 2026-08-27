@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ForayConverter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="extension://MDLConverters/xForayConverter \\searchdata\apps\MDL\xForayConverter.xsd extension://MDLConverters/ForayConverter \\searchdata\apps\MDL\ForayConverter.xsd extension://MDLConverters/MetricSetZipConverter \\searchdata\apps\MDL\MetricSetZipConverter.xsd" xmlns:xforay="extension://MDLConverters/xForayConverter" xmlns:foray="extension://MDLConverters/ForayConverter" xmlns:metricSet="extension://MDLConverters/MetricSetZipConverter">
+  <foray:BaseAliasTableName>BaseAliasTable</foray:BaseAliasTableName>
+  <metricSet:Settings>
+    <metricSet:Filename>MetricSet.zip</metricSet:Filename>
+    <metricSet:IgnoreAssemblies>
+      <metricSet:IgnoreAssembly>ScopeRuntime</metricSet:IgnoreAssembly>
+      <metricSet:IgnoreAssembly>YamlDotNet</metricSet:IgnoreAssembly>
+    </metricSet:IgnoreAssemblies>
+    <metricSet:Plugins>
+      <metricSet:Plugin>
+        <metricSet:MetricSet>jx111_Foray</metricSet:MetricSet>
+        <metricSet:BaseTable>Base</metricSet:BaseTable>
+        <metricSet:Assembly>MDLConverters</metricSet:Assembly>
+        <metricSet:Type>Microsoft.DataMining.MDL.Converters.MetricSetZip.Foray.ForayMetricSetConverterPlugin</metricSet:Type>
+      </metricSet:Plugin>
+    </metricSet:Plugins>
+  </metricSet:Settings>
+</ForayConverter>

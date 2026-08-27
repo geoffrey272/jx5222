@@ -1,5 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Mdl xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="\\searchdata\apps\MDL\Mdl.xsd" Name="jx2121">
+<Mdl xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="\\searchdata\apps\MDL\Mdl.xsd" xsi:schemaLocation="extension://MDLConverters/VivaceConverter \\searchdata\apps\MDL\VivaceConverter.xsd extension://MDLConverters/VivaceConverter \\searchdata\apps\MDL\VivaceConverter.xsd" xmlns:vivace="extension://MDLConverters/VivaceConverter" Name="jiaxiang0827">
+  <Extensions>
+    <vivace:MetricSetType>Normal</vivace:MetricSetType>
+  </Extensions>
   <Usings>
     <Using Name="System" />
     <Using Name="System.Linq" />
