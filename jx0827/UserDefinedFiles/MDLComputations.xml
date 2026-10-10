@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mdl xsi:noNamespaceSchemaLocation="\\searchdata\apps\MDL\Mdl.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:foray="extension://MDLConverters/ForayConverter" xsi:schemaLocation="extension://MDLConverters/ForayConverter \\searchdata\apps\MDL\ForayConverter.xsd">
   <Computations>
-    <Column Name="test21" Type="bool?" Level="Base" IsPublic="false">
+    <Column Name="test212" Type="bool?" Level="Base" IsPublic="false">
       <Description><![CDATA[]]></Description>
       <Definition><![CDATA[((bool)(assignmentContext.Contains("ss")))]]></Definition>
     </Column>
@@ -11,7 +11,7 @@
       <foray:Description><![CDATA[ssss111]]></foray:Description>
     </foray:Statistic>
     <ComputationTemplate TemplateName="EventDefinitionTemplate">
-      <TemplateParameters>
+      <TemplateParameter给i他branchs>
         <TemplateParameter Name="Level" Type="aggregationLevel" Description="Select an aggregation level in your metric set to define your metrics." />
         <TemplateParameter Name="EventDefinition" Type="string" Description="Write a base-level boolean event condition (example: `EventName == “click”`)  or the name of a boolean custom column (example: `IsClick`)." />
         <TemplateParameter Name="EventNameForDisplay" Type="string" Description="Use a friendly nickname for the event definition to display in scorecards." />
