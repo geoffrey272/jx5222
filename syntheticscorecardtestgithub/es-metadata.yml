@@ -1,0 +1,8 @@
+schemaVersion: 0.0.1
+isProduction: false
+accountableOwners:
+  service: 6b4ef9aa-1e3a-4a64-94c9-8387d74d5676
+routing:
+  defaultAreaPath:
+    org: experimentation
+    path: ExpMetrics

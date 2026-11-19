@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mdl xsi:noNamespaceSchemaLocation="\\searchdata\apps\MDL\Mdl.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:foray="extension://MDLConverters/ForayConverter" xsi:schemaLocation="extension://MDLConverters/ForayConverter \\searchdata\apps\MDL\ForayConverter.xsd">
+  <Computations>
+    <Column Type="string" Level="Base" Name="IG" IsPublic="true">
+      <Definition><![CDATA[
+        syntheticscorecardtestgithubNamespace.impression_id
+      ]]></Definition>
+    </Column>
+    <Column Type="string" Level="Base" Name="SESSION_ID" IsPublic="true">
+      <Definition><![CDATA[
+        syntheticscorecardtestgithubNamespace.clientid
+      ]]></Definition>
+    </Column>
+    <Column Type="string" Level="Base" Name="USER" IsPublic="true">
+      <Definition><![CDATA[
+        syntheticscorecardtestgithubNamespace.clientid
+      ]]></Definition>
+    </Column>
+    <Column Type="string" Level="Base" Name="RAWMUID" IsPublic="true">
+      <Definition><![CDATA[
+        syntheticscorecardtestgithubNamespace.clientid
+      ]]></Definition>
+    </Column>
+    <Column Type="long" Level="ImpressionId" Name="QCNT_ImpressionId" IsPublic="false">
+      <Definition><![CDATA[SUM(QCNT)]]></Definition>
+    </Column>
+    <Column Type="string" Level="ImpressionId" Name="MinQueryDate_ImpressionId" IsPublic="false">
+      <Definition><![CDATA[MIN(MinQueryDate)]]></Definition>
+    </Column>
+    <Column Type="string" Level="ImpressionId" Name="MaxQueryDate_ImpressionId" IsPublic="false">
+      <Definition><![CDATA[MAX(MaxQueryDate)]]></Definition>
+    </Column>
+    <Column Type="string" Level="ImpressionId" Name="MinQueryTime_ImpressionId" IsPublic="false">
+      <Definition><![CDATA[MIN(MinQueryTime)]]></Definition>
+    </Column>
+    <Column Type="string" Level="ImpressionId" Name="MaxQueryTime_ImpressionId" IsPublic="false">
+      <Definition><![CDATA[MAX(MaxQueryTime)]]></Definition>
+    </Column>
+    <foray:Statistic Levels="ImpressionId,ClientId" Name="QCNT">
+      <foray:Definition><![CDATA[STAVG(QCNT_ImpressionId)]]></foray:Definition>
+    </foray:Statistic>
+    <foray:Statistic Levels="ImpressionId,ClientId" Name="MinQueryDate">
+      <foray:Definition><![CDATA[STMIN(MinQueryDate_ImpressionId)]]></foray:Definition>
+    </foray:Statistic>
+    <foray:Statistic Levels="ImpressionId,ClientId" Name="MaxQueryDate">
+      <foray:Definition><![CDATA[STMAX(MaxQueryDate_ImpressionId)]]></foray:Definition>
+    </foray:Statistic>
+    <foray:Statistic Levels="ImpressionId,ClientId" Name="MinQueryTime">
+      <foray:Definition><![CDATA[STMIN(MinQueryTime_ImpressionId)]]></foray:Definition>
+    </foray:Statistic>
+    <foray:Statistic Levels="ImpressionId,ClientId" Name="MaxQueryTime">
+      <foray:Definition><![CDATA[STMAX(MaxQueryTime_ImpressionId)]]></foray:Definition>
+    </foray:Statistic>
+    <Column Type="string" Level="Base" Name="FLIGHT" IsPublic="true">
+      <Definition><![CDATA[OnboardingCommonHelper.ForayCommonHelper.MatchFlight(assignmentContext, ';',"#Flights#",'|')]]></Definition>
+    </Column>
+    <Column Type="string" Level="Base" Name="PRIMARY_FLIGHT" IsPublic="true">
+      <Definition><![CDATA[OnboardingCommonHelper.ForayCommonHelper.MatchFlight(assignmentContext, ';',"#Flights#",'|')]]></Definition>
+    </Column>
+    <Column Type="string" Level="Base" Name="DATE" IsPublic="true">
+      <Definition><![CDATA[datetime.ToString("yyyy-MM-dd")]]></Definition>
+      <Extensions>
+        <foray:IsForaySegment>true</foray:IsForaySegment>
+      </Extensions>
+    </Column>
+    <Column Type="int" Level="Base" Name="QCNT" IsPublic="false">
+      <Definition><![CDATA[1]]></Definition>
+    </Column>
+    <Column Type="string" Level="Base" Name="REQUEST_TIME" IsPublic="true">
+      <Definition><![CDATA[datetime.ToString("o")]]></Definition>
+    </Column>
+    <Column Type="string" Level="Base" Name="MinQueryDate" IsPublic="false">
+      <Definition><![CDATA[datetime.ToString("yyyy-MM-dd")]]></Definition>
+    </Column>
+    <Column Type="string" Level="Base" Name="MaxQueryDate" IsPublic="false">
+      <Definition><![CDATA[datetime.ToString("yyyy-MM-dd")]]></Definition>
+    </Column>
+    <Column Type="string" Level="Base" Name="MinQueryTime" IsPublic="false">
+      <Definition><![CDATA[datetime.ToString("o")]]></Definition>
+    </Column>
+    <Column Type="string" Level="Base" Name="MaxQueryTime" IsPublic="false">
+      <Definition><![CDATA[datetime.ToString("o")]]></Definition>
+    </Column>
+  </Computations>
+</Mdl>
