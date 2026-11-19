@@ -1,0 +1,20 @@
+{
+  "AlertDefinitions": [
+    {
+      "Id": 0,
+      "IsActive": true,
+      "AnalysisCategory": "SampleRatioMismatch",
+      "ExperimentAnalysisType": "AB",
+      "Metric": "QCNT",
+      "RollupUnit": "RAWMUID",
+      "IncludeNonStandardScorecards": false,
+      "AlphaTolerance": 0.0005,
+      "RequiredCount": 1000,
+      "SegmentDiffAlphaTolerance": 0.01,
+      "Priority": 2,
+      "AutoShutdownConfig": {
+        "IsEnabled": false
+      }
+    }
+  ]
+}
