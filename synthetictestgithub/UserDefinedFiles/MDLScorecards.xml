@@ -4,5 +4,6 @@
     <Import File="Scorecard\testlayout.UserBased.xml" />
     <Import File="Scorecard\CstGitHubSourceLayout.UserBased.xml" />
     <Import File="Scorecard\TestScorecardLayout-20261124074221.UserBased.xml" />
+    <Import File="Scorecard\CstClosedPullRequest-20261125140154.UserBased.xml" />
   </Imports>
 </Mdl>
